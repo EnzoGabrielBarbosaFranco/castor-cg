@@ -847,7 +847,7 @@
   }
 
   .dep-texto {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     line-height: 1.75;
     color: rgba(255,255,255,0.65);
     font-weight: 300;
@@ -903,14 +903,16 @@
   }
 
   .loc-unidade-tel {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
+    font-weight: 400;
     color: var(--cinza);
   }
 
   .loc-horario {
-    font-size: 0.8rem;
+    font-size: 0.86rem;
     color: var(--cinza);
-    margin-top: 8px;
+    margin-top: 10px;
+    font-weight: 400;
   }
 
   .loc-mapa {
@@ -983,6 +985,11 @@
     gap: 10px;
     margin-bottom: 14px;
     align-items: center;
+    transition: padding-left var(--transicao);
+  }
+
+  .footer-contato-item:hover {
+    padding-left: 6px;
   }
 
   .footer-contato-item svg {
@@ -998,6 +1005,18 @@
     color: var(--branco);
     font-weight: 400;
     line-height: 1.5;
+  }
+
+  .footer-contato-item a {
+    color: var(--branco);
+    font-size: 0.86rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: color var(--transicao);
+  }
+
+  .footer-contato-item a:hover {
+    color: var(--ouro-claro);
   }
 
   .footer-redes {
