@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Castor | Excelência em Qualidade do Sono</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.webp">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon.webp">
+
+<style>
+  /* =============================================
+     CSS CUSTOM PROPERTIES
+  ============================================= */
+  :root {
+    --azul-profundo: #b01a16;
+    --azul-medio: #8a1412;
+    --ouro: #fe0908;
+    --ouro-claro: #f7f7f7;
+    --branco: #FFFFFF;
+    --off-white: #fdf5f5;
+    --cinza-claro: #f7f7f7;
+    --cinza: #888;
+    --texto-escuro: #1A1A1A;
+    --sombra: 0 8px 40px rgba(176, 26, 22, 0.12);
+    --sombra-hover: 0 20px 60px rgba(176, 26, 22, 0.22);
+    --font-titulo: 'Playfair Display', Georgia, serif;
+    --font-corpo: 'Montserrat', sans-serif;
+    --border-radius: 4px;
+    --transicao: 0.3s ease;
+  }
+
+  /* =============================================
+     RESET & BASE
+  ============================================= */
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-corpo);
+    color: var(--texto-escuro);
+    background: var(--branco);
+    overflow-x: hidden;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* =============================================
+     ANIMAÇÕES DE SCROLL (IntersectionObserver)
+  ============================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* =============================================
+     UTILITÁRIOS
+  ============================================= */
+  .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    font-family: var(--font-corpo);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
+  }
+
+  .btn-ouro {
+    width: fit-content;
+    background: var(--azul-medio);
+    color: var(--branco);
+  }
+  .btn-ouro:hover {
+    background: var(--ouro);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(176, 26, 22, 0.4);
+  }
+
+  .btn-outline-branco {
+    background: transparent;
+    color: var(--branco);
+    border: 1.5px solid rgba(255,255,255,0.6);
+  }
+  .btn-outline-branco:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: var(--branco);
+    transform: translateY(-2px);
+  }
+
+  .secao-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--azul-profundo);
+  }
+
+  .secao-subtitulo {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    margin-bottom: 12px;
+  }
+
+  .secao-texto {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #555;
+  }
+
+  /* =============================================
+     TOP BAR
+  ============================================= */
+  .top-bar {
+    background: var(--azul-profundo);
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .top-bar p {
+    color: var(--branco);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  .top-bar strong {
+    color: var(--ouro);
+    font-weight: 600;
+  }
+
+  /* =============================================
+     HEADER
+  ============================================= */
+  .header {
+    background: var(--branco);
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(176, 26, 22, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(176, 26, 22, 0.06);
+  }
+
+  .logo {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-logo img{
+    cursor: pointer;
+  }
+
+  .logo-icone {
+    width: 44px;
+    height: 44px;
+    background: var(--azul-profundo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-icone svg { width: 24px; height: 24px; fill: var(--ouro); }
+
+  .logo-texto {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-nome {
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--azul-profundo);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-slogan {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ouro);
+  }
+
+  .header-contatos {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .contato-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contato-icone {
+    width: 36px;
+    height: 36px;
+    background: var(--branco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contato-icone svg { width: 20px; height: 20px; fill: var(--azul-profundo); }
+
+  .contato-info { display: flex; flex-direction: column; }
+
+  .contato-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .contato-valor {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--azul-profundo);
+  }
+
+  /* =============================================
+     HERO BANNER
+  ============================================= */
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--azul-profundo);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, rgba(80,10,8,0.95) 40%, rgba(80,10,8,0.55) 100%),
+      url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=80') center/cover no-repeat;
+  }
+
+  .hero-decorativo {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45vw;
+    height: 80%;
+    background: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80') center/cover;
+    clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 0.55;
+  }
+
+  .hero-conteudo {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    padding: 60px 60px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(254,9,8,0.18);
+    border: 1px solid rgba(254,9,8,0.4);
+    padding: 8px 18px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+  }
+
+  .hero-badge span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ouro-claro);
+  }
+
+  .hero-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--branco);
+    margin-bottom: 20px;
+  }
+
+  .hero-titulo em {
+    color: var(--ouro);
+    font-style: italic;
+  }
+
+  .hero-subtitulo {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 20px;
+    max-width: 480px;
+  }
+
+  .hero-acoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-botoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-selos {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    z-index: 2;
+  }
+
+  .selo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+  }
+
+  .selo-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--branco);
+  }
+
+  .selo-txt {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+    max-width: 70px;
+  }
+
+  /* =============================================
+     CATEGORIAS / PRODUTOS
+  ============================================= */
+  .categorias {
+    padding: 100px 60px;
+    background: var(--branco);
+  }
+
+  .categorias-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .categorias-header .secao-titulo { margin-bottom: 16px; }
+
+  .categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .card-produto {
+    position: relative;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transicao), box-shadow var(--transicao);
+  }
+
+  .card-produto:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-hover);
+  }
+
+  .card-produto-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+  }
+
+  .card-produto:hover .card-produto-bg {
+    transform: scale(1.06);
+  }
+
+  .card-produto-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(80,10,8,0.9) 0%, rgba(80,10,8,0.3) 55%, transparent 100%);
+  }
+
+  .card-produto-conteudo {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 30px;
+    z-index: 2;
+  }
+
+  .card-produto-marca {
+    font-size: 0.68rem;
+    font-weight: bold;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ouro-claro);
+    margin-bottom: 8px;
+  }
+
+  .card-produto-nome {
+    font-family: var(--font-titulo);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--branco);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .card-produto-desc {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+
+  .card-produto-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--azul-medio);
+    color: var(--branco);
+    padding: 10px 22px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
+    transition: background var(--transicao), transform var(--transicao);
+  }
+
+  .card-produto-btn:hover {
+    background: var(--ouro);
+    transform: translateX(4px);
+  }
+
+  /* =============================================
+     INSTITUCIONAL 1 — A LOJA
+  ============================================= */
+  .institucional-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 580px;
+  }
+
+  .inst-imagem {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+  }
+
+  .inst-imagem img,
+  .inst-imagem-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s ease;
+  }
+
+  .inst-imagem:hover .inst-imagem-bg {
+    transform: scale(1.04);
+  }
+
+  .inst-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 70px;
+    background: var(--branco);
+  }
+
+  .inst-texto .secao-titulo { margin-bottom: 20px; }
+  .inst-texto .secao-texto { margin-bottom: 32px; }
+
+  .inst-features {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .inst-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--texto-escuro);
+  }
+
+  .inst-feature-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--ouro);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* =============================================
+     INSTITUCIONAL 2 — DIFERENCIAIS
+  ============================================= */
+  .institucional-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 580px;
+  }
+
+.logo-img {
+  width: 130px;
+}
+
+  .header {
+    height: 100px; /* antes devia estar ~70/80 */
+  }
+
+  .inst-dark {
+    background: var(--azul-medio);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .inst-dark::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(254,9,8,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .inst-dark .secao-subtitulo { color: var(--ouro-claro); }
+  .inst-dark .secao-titulo { color: var(--branco); margin-bottom: 20px; }
+  .inst-dark .secao-texto { color: rgba(255,255,255,0.65); margin-bottom: 36px; }
+
+  .inst-dark-lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .diferencial-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .diferencial-num {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--branco);
+    line-height: 1;
+  }
+
+  .btn.btn-ouro.reveal.reveal-delay-3.visible.conhecer-modelos {
+    background: var(--ouro-claro);
+    color: var(--azul-medio);
+  }
+
+  .btn.btn-ouro.reveal.reveal-delay-3.visible.conhecer-modelos:hover {
+    background: var(--ouro);
+    color: var(--branco);
+  }
+
+  .diferencial-txt {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+  }
+
+  /* =============================================
+     SEÇÃO DE VÍDEO
+  ============================================= */
+  .video-secao {
+    background: var(--cinza-claro);
+    padding: 100px 60px;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .video-placeholder {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    cursor: pointer;
+    box-shadow: var(--sombra);
+  }
+
+  .video-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&q=80') center/cover;
+    transition: transform 0.5s ease;
+  }
+
+  .video-placeholder:hover .video-bg { transform: scale(1.04); }
+
+  .video-overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: rgba(80,10,8,0.45);
+  }
+
+  .video-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px; height: 72px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transicao), background var(--transicao);
+  }
+
+  .video-placeholder:hover .video-play {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--ouro);
+  }
+
+  .video-play svg { width: 28px; height: 28px; fill: var(--azul-profundo); margin-left: 4px; fill: var(--azul-profundo); }
+  .video-placeholder:hover .video-play svg { fill: var(--branco); }
+
+  .video-texto .secao-titulo { margin-bottom: 20px; }
+  .video-texto .secao-texto { margin-bottom: 32px; }
+
+  .video-stats {
+    display: flex;
+    gap: 32px;
+    padding-top: 28px;
+  }
+
+  .video-stat-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--azul-profundo);
+  }
+
+  .video-stat-txt {
+    font-size: 0.75rem;
+    color: var(--cinza);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* =============================================
+     MARCAS
+  ============================================= */
+  .marcas {
+    padding: 80px 60px;
+    background: var(--branco);
+    text-align: center;
+  }
+
+  .marcas .secao-titulo { margin-bottom: 50px; }
+
+  .marcas-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    align-items: center;
+  }
+
+  .marca-item {
+    padding: 22px 16px;
+    border: 1px solid rgba(176,26,22,0.08);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--transicao), box-shadow var(--transicao), transform var(--transicao);
+    cursor: default;
+  }
+
+  .marca-item:hover {
+    border-color: var(--ouro);
+    box-shadow: 0 4px 20px rgba(176,26,22,0.15);
+    transform: translateY(-4px);
+  }
+
+  .marca-nome {
+    font-family: var(--font-titulo);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--azul-profundo);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* =============================================
+     DEPOIMENTOS
+  ============================================= */
+  .depoimentos {
+    background: #700101;
+    padding: 100px 60px;
+  }
+
+  .depoimentos-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .depoimentos-header .secao-titulo { color: var(--branco); margin-bottom: 12px; }
+  .depoimentos-header .secao-texto { color: rgba(255,255,255,0.5); }
+
+  .depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card-depoimento {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 32px;
+    transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao);
+  }
+
+  .card-depoimento:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  .dep-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .dep-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-titulo);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--branco);
+    flex-shrink: 0;
+  }
+
+  .dep-info { flex: 1; }
+
+  .dep-nome {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--branco);
+    margin-bottom: 4px;
+  }
+
+  .dep-data {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .dep-google {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .dep-estrelas {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 14px;
+  }
+
+  .dep-estrelas span {
+    color: #FBBF24;
+    font-size: 0.9rem;
+  }
+
+  .dep-texto {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+  }
+
+  /* =============================================
+     LOCALIZAÇÃO
+  ============================================= */
+  .localizacao {
+    padding: 100px 60px;
+    background: var(--branco);
+  }
+
+  .loc-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .loc-header .secao-titulo { margin-bottom: 12px; }
+
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .loc-info { display: flex; flex-direction: column; gap: 28px; }
+
+  .loc-unidade {
+    background: var(--branco);
+    padding: 28px;
+    border-radius: 8px;
+    border-left: 4px solid var(--ouro);
+    box-shadow: 0 4px 20px rgba(176,26,22,0.2);
+  }
+
+  .loc-unidade-titulo {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    margin-bottom: 10px;
+  }
+
+  .loc-unidade-end {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--azul-profundo);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .loc-unidade-tel {
+    font-size: 0.85rem;
+    color: var(--cinza);
+  }
+
+  .loc-horario {
+    font-size: 0.8rem;
+    color: var(--cinza);
+    margin-top: 8px;
+  }
+
+  .loc-mapa {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    height: 400px;
+  }
+
+  .loc-mapa iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  .footer {
+    background: #700101;
+    padding: 80px 60px 40px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 60px;
+  }
+
+  .footer-logo .logo-nome { color: var(--branco); font-size: 1.6rem; }
+  .footer-logo .logo-slogan { color: var(--ouro); }
+
+  .footer-desc {
+    font-size: 0.86rem;
+    line-height: 1.8;
+    color: var(--branco);
+    margin-top: 16px;
+    font-weight: 400;
+  }
+
+  .footer-col-titulo {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--branco);
+    margin-bottom: 22px;
+    font-weight: bold;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 0.86rem;
+    color: var(--branco);
+    font-weight: 400;
+    transition: color var(--transicao), padding-left var(--transicao);
+  }
+
+  .footer-links a:hover {
+    padding-left: 6px;
+  }
+
+  .footer-contato-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+
+  .footer-contato-item svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--ouro);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .footer-contato-item span {
+    font-size: 0.86rem;
+    color: var(--branco);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .footer-redes {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .rede-btn {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transicao), transform var(--transicao);
+  }
+
+  .rede-btn svg { width: 18px; height: 18px; fill: var(--branco); }
+
+  .rede-btn:hover {
+    background: var(--azul-profundo);
+    transform: translateY(-3px);
+  }
+
+  .rede-btn:hover svg { fill: var(--branco); }
+
+  .footer-linha {
+    border: none;
+    border-top: 1px solid var(--branco);
+    margin-bottom: 28px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--branco);
+  }
+
+  .footer-copy a {
+    text-decoration: underline;
+  }
+
+  .footer-copy a:hover {
+    color: var(--ouro);
+  }
+
+
+  .footer-copy strong { color: var(--branco); }
+
+  /* =============================================
+     WHATSAPP FLUTUANTE
+  ============================================= */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    width: 58px; height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+    transition: transform var(--transicao);
+    animation: pulso 2.5s infinite;
+  }
+
+  .whatsapp-float:hover {
+    animation: none;
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(37,211,102,0.6);
+  }
+
+  .whatsapp-float svg { width: 30px; height: 30px; fill: var(--branco); }
+
+  @keyframes pulso {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 6px 40px rgba(37,211,102,0.7), 0 0 0 12px rgba(37,211,102,0.1); }
+  }
+
+  /* =============================================
+     RESPONSIVIDADE — MOBILE
+  ============================================= */
+  @media (max-width: 1024px) {
+    .header { padding: 16px 30px; }
+    .header-contatos { gap: 16px; }
+
+    .hero-conteudo { padding: 60px 30px; }
+    .hero-selos { left: 30px; bottom: 30px; }
+    .hero-decorativo { display: none; }
+
+    .categorias { padding: 70px 30px; }
+    .categorias-grid { grid-template-columns: 1fr 1fr; }
+
+    .institucional-1,
+    .institucional-2 { grid-template-columns: 1fr; }
+
+    .inst-imagem { min-height: 320px; }
+    .inst-texto { padding: 60px 40px; }
+    .inst-dark { padding: 60px 40px; }
+
+    .video-secao { padding: 70px 30px; }
+    .video-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    .marcas { padding: 60px 30px; }
+    .marcas-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .depoimentos { padding: 70px 30px; }
+    .depoimentos-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    .localizacao { padding: 70px 30px; }
+    .loc-grid { grid-template-columns: 1fr; }
+
+    .institucional-2 .inst-imagem { order: -1; }
+
+    .footer { padding: 60px 30px 30px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+
+  @media (max-width: 640px) {
+
+    .header {
+      height: auto;
+      padding: 12px 10px;
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-img {
+        width: 130px;
+    }
+
+    .header-contatos {
+        display: flex;
+        gap: 8px;
+        width: auto !important;
+    }
+
+    .contato-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .contato-label {
+        display: none !important; 
+    }
+
+    .contato-valor {
+        font-size: 11px;
+        white-space: nowrap !important;
+        font-weight: bold;
+    }
+
+    .contato-icone {
+        width: 28px !important;
+        height: 28px !important;
+        padding: 6px !important;
+    }
+    
+    .contato-icone svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .top-bar p { font-size: 0.7rem; }
+
+    .header {
+      padding: 14px 20px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .header-contatos {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .hero-conteudo { padding: 40px 20px; }
+    .hero-titulo { font-size: 2.2rem; }
+    .hero-selos { display: none; }
+    .hero-acoes { flex-direction: column; align-items: flex-start; }
+
+    .categorias { padding: 60px 20px; }
+    .categorias-grid { grid-template-columns: 1fr; }
+    .card-produto { height: 360px; }
+
+    .inst-texto,
+    .inst-dark { padding: 50px 24px; }
+
+    .inst-dark-lista { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .video-secao { padding: 60px 20px; }
+
+    .marcas { padding: 50px 20px; }
+    .marcas-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .depoimentos { padding: 60px 20px; }
+
+    .localizacao { padding: 60px 20px; }
+    .loc-mapa { height: 300px; }
+
+    .footer { padding: 50px 20px 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+    .whatsapp-float { right: 20px; bottom: 20px; width: 52px; height: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     HEADER
+============================================= -->
+<header class="header">
+  <div class="logo">
+    <img src="logo.svg" alt="Logo Castor" class="logo-img" title="Logo Castor">
+  </div>
+
+  <div class="header-contatos">
+    <div class="contato-item">
+      <div class="contato-icone">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </div>
+      <div class="contato-info">
+        <span class="contato-label">Ligue agora</span>
+        <a href="https://wa.me/5567991485395" target="_blank" rel="noopener noreferrer" title="Fale pelo WhatsApp"><span class="contato-valor">(67) 99148-5395</span></a>
+      </div>
+    </div>
+    <div class="contato-item">
+      <div class="contato-icone">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </div>
+      <div class="contato-info">
+        <span class="contato-label">Nossas lojas</span>
+        <a href="https://maps.app.goo.gl/Lx5tXAWtZvanA8We8" target="_blank" rel="noopener noreferrer" title="Ver no Google Maps"><span class="contato-valor">Av. Ceará, 1420</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-decorativo"></div>
+
+  <div class="hero-conteudo reveal">
+    <div class="hero-badge">
+      <span>✦ Campo Grande, MS — Desde 2016</span>
+    </div>
+
+    <h1 class="hero-titulo">
+      Durma Melhor,<br>
+      <em>Viva com Mais</em><br>
+      Qualidade
+    </h1>
+
+    <p class="hero-subtitulo">
+      Especialistas em colchões premium em Campo Grande. Trabalhamos com a Castor, a marca de colchões mais premiada do Brasil, oferecendo conforto, tecnologia, atendimento especializado e entrega rápida.
+    </p>
+
+    <div class="hero-acoes">
+      <div class="hero-botoes">
+        <a href="https://wa.me/5567991485395" class="btn btn-outline-branco" title="Falar com Consultor">Falar com consultor</a>
+      </div>
+
+      <div class="hero-selos">
+        <div class="selo reveal reveal-delay-1 visible">
+          <span class="selo-num">+5k</span>
+          <span class="selo-txt">Clientes satisfeitos</span>
+        </div>
+        <div class="selo reveal reveal-delay-2 visible">
+          <span class="selo-num">1</span>
+          <span class="selo-txt">Marca premium</span>
+        </div>
+        <div class="selo reveal reveal-delay-3 visible">
+          <span class="selo-num">10</span>
+          <span class="selo-txt">Anos de mercado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CATEGORIAS / PRODUTOS
+============================================= -->
+<section class="categorias" id="categorias">
+  <div class="categorias-header reveal">
+    <p class="secao-subtitulo">Nosso Portfólio</p>
+    <h2 class="secao-titulo">Colchões de Alto Padrão</h2>
+  </div>
+
+  <div class="categorias-grid">
+    <!-- Card 1 -->
+    <div class="card-produto reveal reveal-delay-1">
+      <div class="card-produto-bg" style="background-image: url('https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=600&auto=format&fit=crop')"></div>
+      <div class="card-produto-overlay"></div>
+      <div class="card-produto-conteudo">
+        <p class="card-produto-marca">Linha Premium</p>
+        <h3 class="card-produto-nome">Stearns &amp; Foster</h3>
+        <p class="card-produto-desc">Colchão de luxo com tecnologia IntelliCoil®</p>
+        <a href="https://wa.me/5567991485395?text=Olá!%20Tenho%20interesse%20no%20colchão%20Stearns%20%26%20Foster." class="card-produto-btn" title="Falar com consultor">
+          Falar com consultor →
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card-produto reveal reveal-delay-2">
+      <div class="card-produto-bg" style="background-image: url('https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=857&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"></div>
+      <div class="card-produto-overlay"></div>
+      <div class="card-produto-conteudo">
+        <p class="card-produto-marca">Conforto Superior</p>
+        <h3 class="card-produto-nome">American Sleep</h3>
+        <p class="card-produto-desc">Molas ensacadas e espuma de alta densidade</p>
+        <a href="https://wa.me/5567991485395?text=Olá!%20Tenho%20interesse%20no%20colchão%20American%20Sleep." class="card-produto-btn" title="Falar com consultor">
+          Falar com consultor →
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card-produto reveal reveal-delay-3">
+      <div class="card-produto-bg" style="background-image: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700&q=80')"></div>
+      <div class="card-produto-overlay"></div>
+      <div class="card-produto-conteudo">
+        <p class="card-produto-marca">Tecnologia Europeia</p>
+        <h3 class="card-produto-nome">Pikolin</h3>
+        <p class="card-produto-desc">Colchão ergonômico com sistema Visco-Pocket</p>
+        <a href="https://wa.me/5567991485395?text=Olá!%20Tenho%20interesse%20no%20colchão%20Pikolin." class="card-produto-btn" title="Falar com consultor">
+          Falar com consultor →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     INSTITUCIONAL 1 — A LOJA
+============================================= -->
+<section class="institucional-1">
+  <div class="inst-imagem">
+    <div class="inst-imagem-bg" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80');"></div>
+  </div>
+  <div class="inst-texto">
+    <div class="reveal">
+      <p class="secao-subtitulo">Sobre a Castor</p>
+      <h2 class="secao-titulo">Por Que Escolher a Castor em Campo Grande?</h2>
+    </div>
+    <p class="secao-texto reveal reveal-delay-1">
+      Há mais de 10 anos em Campo Grande, representando a Castor, a marca de colchões mais premiada do Brasil. Oferecemos conforto, tecnologia e atendimento especializado para transformar suas noites de sono.
+    </p>
+
+    <div class="inst-features reveal reveal-delay-2">
+      <div class="inst-feature">
+        <div class="inst-feature-dot"></div>
+        <span>Consultoria personalizada sem compromisso</span>
+      </div>
+      <div class="inst-feature">
+        <div class="inst-feature-dot"></div>
+        <span>As melhores marcas nacionais e internacionais</span>
+      </div>
+      <div class="inst-feature">
+        <div class="inst-feature-dot"></div>
+        <span>Entrega e montagem incluídas em Campo Grande</span>
+      </div>
+      <div class="inst-feature">
+        <div class="inst-feature-dot"></div>
+        <span>Garantia estendida e troca facilitada</span>
+      </div>
+    </div>
+
+    <a href="https://wa.me/5567991485395" class="btn btn-ouro reveal reveal-delay-3" title="Agendar Visita">Agendar Visita</a>
+  </div>
+</section>
+
+<!-- =============================================
+     INSTITUCIONAL 2 — DIFERENCIAIS
+============================================= -->
+<section class="institucional-2">
+  <div class="inst-dark">
+    <div class="reveal">
+      <p class="secao-subtitulo">Loja de Colchões em Campo Grande</p>
+      <h2 class="secao-titulo" style="color: var(--branco);">Castor | A Escolha de Quem Valoriza o Descanso</h2>
+    </div>
+    <p class="secao-texto reveal reveal-delay-1" style="color: rgba(255,255,255,0.6);">
+      Transforme suas noites de sono com colchões de qualidade premium. Visite uma de nossas lojas e experimente pessoalmente a diferença.
+    </p>
+
+    <div class="inst-dark-lista reveal reveal-delay-2">
+      <div class="diferencial-item">
+        <span class="diferencial-num">10</span>
+        <span class="diferencial-txt">Anos de experiência</span>
+      </div>
+      <div class="diferencial-item">
+        <span class="diferencial-num">1</span>
+        <span class="diferencial-txt">Marca exclusiva</span>
+      </div>
+      <div class="diferencial-item">
+        <span class="diferencial-num">1</span>
+        <span class="diferencial-txt">Loja em Campo Grande</span>
+      </div>
+      <div class="diferencial-item">
+        <span class="diferencial-num">5★</span>
+        <span class="diferencial-txt">Avaliação Google</span>
+      </div>
+    </div>
+
+    <a href="https://wa.me/5567991485395" class="btn btn-ouro reveal reveal-delay-3 conhecer-modelos" title="Conhecer os Modelos">Conhecer os Modelos</a>
+  </div>
+
+  <div class="inst-imagem">
+    <div class="inst-imagem-bg" style="background-image: url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80');"></div>
+  </div>
+</section>
+
+<!-- =============================================
+     SEÇÃO DE VÍDEO
+============================================= -->
+<section class="video-secao">
+  <div class="video-grid">
+    <div class="video-placeholder reveal">
+      <iframe
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/a3Fj6sXqX8s?si=_9sY1iWsMftm1Z2X"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        style="border-radius: inherit; display: block;"
+      ></iframe>
+    </div>
+
+    <div class="video-texto">
+      <div class="reveal">
+        <p class="secao-subtitulo">Conheça mais</p>
+        <h2 class="secao-titulo">Descubra o Conforto da Castor</h2>
+      </div>
+      <p class="secao-texto reveal reveal-delay-1">
+        Cada colchão é uma experiência única. Veja como nossos especialistas ajudam clientes a encontrar o modelo perfeito para cada necessidade, seja para casal, solteiro, queen ou king size.
+      </p>
+      <a href="https://wa.me/5567991485395" class="btn btn-ouro reveal reveal-delay-2" title="Falar com Especialista">Falar com um Especialista</a>
+
+      <div class="video-stats reveal reveal-delay-3">
+        <div>
+          <div class="video-stat-num">5.000+</div>
+          <div class="video-stat-txt">Clientes atendidos</div>
+        </div>
+        <div>
+          <div class="video-stat-num">98%</div>
+          <div class="video-stat-txt">Satisfação</div>
+        </div>
+        <div>
+          <div class="video-stat-num">24h</div>
+          <div class="video-stat-txt">Entrega express</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     MARCAS
+============================================= -->
+<!-- <section class="marcas">
+  <p class="secao-subtitulo reveal">Parceiros Oficiais</p>
+  <h2 class="secao-titulo reveal reveal-delay-1">As Melhores Marcas do Mercado</h2>
+
+  <div class="marcas-grid" style="margin-top:50px;">
+    <div class="marca-item reveal reveal-delay-1">
+      <div class="marca-nome">Stearns &amp; Foster</div>
+    </div>
+    <div class="marca-item reveal reveal-delay-2">
+      <div class="marca-nome">American Sleep</div>
+    </div>
+    <div class="marca-item reveal reveal-delay-3">
+      <div class="marca-nome">Pikolin</div>
+    </div>
+    <div class="marca-item reveal reveal-delay-1">
+      <div class="marca-nome">Tempur</div>
+    </div>
+    <div class="marca-item reveal reveal-delay-2">
+      <div class="marca-nome">Dédicace</div>
+    </div>
+    <div class="marca-item reveal reveal-delay-3">
+      <div class="marca-nome">Smattex</div>
+    </div>
+  </div>
+</section> -->
+
+<!-- =============================================
+     DEPOIMENTOS
+============================================= -->
+<section class="depoimentos">
+  <div class="depoimentos-header reveal">
+    <p class="secao-subtitulo" style="color: var(--ouro);">Avaliações</p>
+    <h2 class="secao-titulo" style="color: var(--branco);">O Que as Pessoas Dizem?</h2>
+    <p class="secao-texto" style="color: rgba(255,255,255,0.5); max-width:500px; margin: 12px auto 0;">Veja por que somos a loja de colchões favorita de Campo Grande.</p>
+  </div>
+
+  <div class="depoimentos-grid">
+    <div class="card-depoimento reveal reveal-delay-1">
+      <div class="dep-header">
+        <div class="dep-avatar" style="background: linear-gradient(135deg,#b01a16,#fe0908);">M</div>
+        <div class="dep-info">
+          <div class="dep-nome">Mariana Costa</div>
+          <div class="dep-data">há 2 semanas</div>
+        </div>
+      </div>
+      <div class="dep-estrelas">
+        <span>★★★★★</span>
+      </div>
+      <p class="dep-texto">"Atendimento impecável! A consultora me ajudou a escolher o colchão perfeito. Durmo muito melhor agora. Recomendo a Castor para todos!"</p>
+    </div>
+
+    <div class="card-depoimento reveal reveal-delay-2">
+      <div class="dep-header">
+        <div class="dep-avatar" style="background: linear-gradient(135deg,#8a1412,#fe0908);">R</div>
+        <div class="dep-info">
+          <div class="dep-nome">Roberto Almeida</div>
+          <div class="dep-data">há 1 mês</div>
+        </div>
+      </div>
+      <div class="dep-estrelas">
+        <span>★★★★★</span>
+      </div>
+      <p class="dep-texto">"Comprei e não me arrependo. A entrega foi rápida e a equipe montou tudo com cuidado. Excelente experiência do início ao fim!"</p>
+    </div>
+
+    <div class="card-depoimento reveal reveal-delay-3">
+      <div class="dep-header">
+        <div class="dep-avatar" style="background: linear-gradient(135deg,#b01a16,#8a1412);">A</div>
+        <div class="dep-info">
+          <div class="dep-nome">Ana Paula Ferreira</div>
+          <div class="dep-data">há 3 semanas</div>
+        </div>
+      </div>
+      <div class="dep-estrelas">
+        <span>★★★★★</span>
+      </div>
+      <p class="dep-texto">"Loja incrível com ótima variedade. O Colchão que comprei transformou meu sono por completo. Valeu cada centavo. Recomendo muito!"</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     LOCALIZAÇÃO
+============================================= -->
+<section class="localizacao">
+  <div class="loc-header reveal">
+    <p class="secao-subtitulo">Visite-nos</p>
+    <h2 class="secao-titulo">Agende uma Visita e Transforme Suas Noites de Sono</h2>
+  </div>
+
+  <div class="loc-grid">
+    <div class="loc-info">
+      <div class="loc-unidade reveal reveal-delay-2">
+        <p class="loc-unidade-titulo">Nossa Loja</p>
+        <p class="loc-unidade-end">Av. Ceará, 1420<br> Campo Grande — MS</p>
+        <p class="loc-unidade-tel">📞 (67) 99148-5395</p>
+        <p class="loc-horario">⏰ Seg–Sex: 08h–18h | Sáb: 08h–12h</p>
+      </div>
+
+      <a href="https://wa.me/5567991485395" class="btn btn-ouro reveal reveal-delay-3" title="Agendar Visita">Agendar Visita pelo WhatsApp</a>
+    </div>
+
+    <div class="loc-mapa reveal reveal-delay-2">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.0951620423425!2d-54.593015799999996!3d-20.4539716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9486e893e2a41031%3A0x22300fa33fdfcb86!2sAv.%20Cear%C3%A1%2C%201420%20-%20Vila%20Antonio%20Vendas%2C%20Campo%20Grande%20-%20MS%2C%2079021-000!5e1!3m2!1spt-BR!2sbr!4v1780686351140!5m2!1spt-BR!2sbr"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Localização Castor Campo Grande">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer class="footer">
+  <div class="footer-grid">
+    <!-- Col 1: Logo + Desc -->
+    <div class="footer-logo">
+      <img src="logo.svg" alt="Logo Castor" class="logo-img" title="Logo Castor">
+      <p class="footer-desc">
+        Especialistas em sono de qualidade há 10 anos. As melhores marcas de colchões com atendimento personalizado em Campo Grande, MS.
+      </p>
+    </div>
+
+    <!-- Col 2: Contatos -->
+    <div>
+      <p class="footer-col-titulo">Contatos</p>
+      <div class="footer-contato-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <a href="https://maps.app.goo.gl/Lx5tXAWtZvanA8We8" target="_blank" rel="noopener noreferrer" title="Ver no Google Maps" style="color: rgba(255,255,255,0.55); transition: color 0.3s;"><span>Av. Ceará, 1420</span></a>
+      </div>
+      <br>
+      <div class="footer-contato-item">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <a href="https://wa.me/5567991485395" target="_blank" rel="noopener noreferrer" title="Fale pelo WhatsApp" style="color: rgba(255,255,255,0.55); transition: color 0.3s;"><span>(67) 99148-5395</span></a>
+      </div>
+    </div>
+
+    <!-- Col 3: Links -->
+    <div>
+      <p class="footer-col-titulo">Nossos Produtos</p>
+      <div class="footer-links">
+        <a href="#categorias" title="Ver Produtos">Colchões de Casal</a>
+        <a href="#categorias" title="Ver Produtos">Colchões Queen</a>
+        <a href="#categorias" title="Ver Produtos">Colchões King</a>
+        <a href="#categorias" title="Ver Produtos">Cama Box</a>
+        <a href="#categorias" title="Ver Produtos">Baú de Cama</a>
+        <a href="#categorias" title="Ver Produtos">Travesseiros</a>
+      </div>
+    </div>
+
+    <!-- Col 4: Redes -->
+    <div>
+      <p class="footer-col-titulo">Redes Sociais</p>
+      <div class="footer-redes">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="rede-btn" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="rede-btn" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/5567991485395" target="_blank" rel="noopener noreferrer" class="rede-btn" aria-label="WhatsApp" title="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        </a>
+        <!-- X -->
+        <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="rede-btn" aria-label="Twitter" title="X (Twitter)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.389 6.231H2.756l7.73-8.835L1.254 2.25H8.08l4.262 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+          </svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="rede-btn" aria-label="YouTube" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="footer-linha">
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© <script>document.write(new Date().getFullYear())</script> <strong>Castor</strong>. Todos os direitos reservados. Campo Grande, MS.</p>
+    <p class="footer-copy">Desenvolvido por <a href="https://wa.me/5567996521256" target="_blank" rel="noopener noreferrer" title="Desenvolvido por Enzo Gabriel">Enzo Gabriel</a></p>
+  </div>
+</footer>
+
+<!-- =============================================
+     WHATSAPP FLUTUANTE
+============================================= -->
+<a href="https://wa.me/5567991485395?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20colchões%20da%20Sleep%20House." 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   aria-label="Fale conosco pelo WhatsApp" title="WhatsApp Castor">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<!-- =============================================
+     JAVASCRIPT — IntersectionObserver
+============================================= -->
+<script>
+  // =============================================
+  // ANIMAÇÕES DE SCROLL
+  // =============================================
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  // Observar todos os elementos com classe .reveal
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+  // =============================================
+  // HEADER SCROLL SHADOW
+  // =============================================
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header.style.boxShadow = '0 4px 30px rgba(176,26,22,0.12)';
+    } else {
+      header.style.boxShadow = '0 2px 20px rgba(176,26,22,0.06)';
+    }
+  });
+
+
+  // =============================================
+  // SMOOTH SCROLL PARA ÂNCORAS
+  // =============================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
