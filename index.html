@@ -130,9 +130,9 @@
 
   .secao-texto {
     font-size: 0.95rem;
-    font-weight: 300;
+    font-weight: 500;
     line-height: 1.85;
-    color: #555;
+    color: var(--cinza);
   }
 
   /* =============================================
@@ -266,31 +266,89 @@
     align-items: center;
     overflow: hidden;
     background: var(--azul-profundo);
+    min-height: 640px;
   }
 
   .hero-bg {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(105deg, rgba(80,10,8,0.95) 40%, rgba(80,10,8,0.55) 100%),
-      url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=80') center/cover no-repeat;
+      radial-gradient(circle at 78% 20%, rgba(254,9,8,0.28) 0%, rgba(254,9,8,0.08) 26%, transparent 48%),
+      linear-gradient(105deg, rgba(64,6,5,0.98) 0%, rgba(103,10,8,0.97) 48%, rgba(138,20,18,0.94) 100%);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('logo-branca.svg') center/78% auto no-repeat;
+    opacity: 0.3;
+    pointer-events: none;
   }
 
   .hero-decorativo {
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45vw;
-    height: 80%;
-    background: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80') center/cover;
-    clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
-    opacity: 0.55;
+    top: 0;
+    bottom: 0;
+    width: min(52vw, 720px);
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 66px 12px 0 120px;
+    clip-path: polygon(16% 0%, 100% 0%, 100% 100%, 0% 100%);
+    border-left: 1px solid rgba(255,255,255,0.16);
+  }
+
+  .hero-decorativo::after {
+    content: '';
+    position: absolute;
+    left: 32%;
+    right: 2%;
+    bottom: 28px;
+    height: 54px;
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse at center, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.18) 44%, transparent 72%);
+    filter: blur(10px);
+  }
+
+  .hero-mascote {
+    position: relative;
+    z-index: 3;
+    width: clamp(340px, 28vw, 405px);
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+    object-position: bottom center;
+    transform: translateX(62px);
+    filter: drop-shadow(0 24px 34px rgba(0,0,0,0.36));
+  }
+
+  .hero-decorativo picture {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .hero-decorativo picture::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    bottom: 18%;
+    width: 78%;
+    height: 62%;
+    transform: translateX(-50%);
+    border-radius: 999px 999px 36px 36px;
   }
 
   .hero-conteudo {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 640px;
     padding: 60px 60px;
   }
@@ -332,7 +390,7 @@
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.75;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,1);
     margin-bottom: 20px;
     max-width: 480px;
   }
@@ -849,8 +907,8 @@
   .dep-texto {
     font-size: 0.86rem;
     line-height: 1.75;
-    color: rgba(255,255,255,0.65);
-    font-weight: 300;
+    color: rgba(255,255,255,1);
+    font-weight: 400;
   }
 
   /* =============================================
@@ -904,7 +962,7 @@
 
   .loc-unidade-tel {
     font-size: 0.86rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--cinza);
   }
 
@@ -912,7 +970,7 @@
     font-size: 0.86rem;
     color: var(--cinza);
     margin-top: 10px;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .loc-mapa {
@@ -995,7 +1053,7 @@
   .footer-contato-item svg {
     width: 20px;
     height: 20px;
-    fill: var(--ouro);
+    fill: var(--branco);
     flex-shrink: 0;
     margin-top: 3px;
   }
@@ -1111,9 +1169,23 @@
     .header { padding: 16px 30px; }
     .header-contatos { gap: 16px; }
 
-    .hero-conteudo { padding: 60px 30px; }
+    .hero { min-height: 600px; }
+    .hero-conteudo {
+      max-width: 590px;
+      padding: 60px 30px;
+    }
     .hero-selos { left: 30px; bottom: 30px; }
-    .hero-decorativo { display: none; }
+    .hero-decorativo {
+      width: 48vw;
+      padding: 88px 8px 0 72px;
+      opacity: 0.92;
+    }
+    .hero-mascote {
+      width: clamp(290px, 31vw, 350px);
+      height: auto;
+      max-height: 540px;
+      transform: translateX(52px);
+    }
 
     .categorias { padding: 70px 30px; }
     .categorias-grid { grid-template-columns: 1fr 1fr; }
@@ -1207,10 +1279,31 @@
       width: 100%;
     }
 
-    .hero-conteudo { padding: 40px 20px; }
+    .hero {
+      min-height: auto;
+      display: block;
+      padding-bottom: 0;
+    }
+    .hero-bg {
+      background:
+        radial-gradient(circle at 80% 18%, rgba(254,9,8,0.24) 0%, rgba(254,9,8,0.08) 32%, transparent 56%),
+        linear-gradient(180deg, rgba(66,7,6,0.98) 0%, rgba(94,10,8,0.96) 58%, rgba(80,10,8,0.98) 100%);
+    }
+    .hero-bg::after {
+      background-size: 92% auto;
+      background-position: center 58%;
+      opacity: 0.25;
+    }
+    .hero-conteudo {
+      padding: 40px 20px 40px;
+      max-width: none;
+    }
     .hero-titulo { font-size: 2.2rem; }
     .hero-selos { display: none; }
     .hero-acoes { flex-direction: column; align-items: flex-start; }
+    .hero-decorativo {
+      display: none;
+    }
 
     .categorias { padding: 60px 20px; }
     .categorias-grid { grid-template-columns: 1fr; }
@@ -1277,7 +1370,12 @@
 ============================================= -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-decorativo"></div>
+  <div class="hero-decorativo" aria-hidden="true">
+    <picture>
+      <source srcset="mascote-bem-menor.png" media="(max-width: 640px)">
+      <img src="mascote-menor.png" width="1006" height="1806" loading="eager" alt="" class="hero-mascote">
+    </picture>
+  </div>
 
   <div class="hero-conteudo reveal">
     <div class="hero-badge">
@@ -1533,7 +1631,7 @@
   <div class="depoimentos-header reveal">
     <p class="secao-subtitulo" style="color: var(--ouro);">Avaliações</p>
     <h2 class="secao-titulo" style="color: var(--branco);">O Que as Pessoas Dizem?</h2>
-    <p class="secao-texto" style="color: rgba(255,255,255,0.5); max-width:500px; margin: 12px auto 0;">Veja por que somos a loja de colchões favorita de Campo Grande.</p>
+    <p class="secao-texto" style="color: rgba(255,255,255,1); max-width:500px; margin: 12px auto 0;">Veja por que somos a loja de colchões favorita de Campo Grande.</p>
   </div>
 
   <div class="depoimentos-grid">
@@ -1604,7 +1702,7 @@
 
     <div class="loc-mapa reveal reveal-delay-2">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.0951620423425!2d-54.593015799999996!3d-20.4539716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9486e893e2a41031%3A0x22300fa33fdfcb86!2sAv.%20Cear%C3%A1%2C%201420%20-%20Vila%20Antonio%20Vendas%2C%20Campo%20Grande%20-%20MS%2C%2079021-000!5e1!3m2!1spt-BR!2sbr!4v1780686351140!5m2!1spt-BR!2sbr"
+        src="https://www.google.com/maps/embed?pb=!3m2!1spt-BR!2sbr!4v1780958410737!5m2!1spt-BR!2sbr!6m8!1m7!1sH0AFIyoFDkLDPzPgwoq-6Q!2m2!1d-20.45402295505622!2d-54.59317866040651!3f54.31358699877527!4f3.0256122554407057!5f0.7820865974627469"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -1621,7 +1719,7 @@
   <div class="footer-grid">
     <!-- Col 1: Logo + Desc -->
     <div class="footer-logo">
-      <img src="logo.svg" alt="Logo Castor" class="logo-img" title="Logo Castor">
+      <img src="logo-branca.svg" alt="Logo Castor" class="logo-img" title="Logo Castor">
       <p class="footer-desc">
         Especialistas em sono de qualidade há 10 anos. As melhores marcas de colchões com atendimento personalizado em Campo Grande, MS.
       </p>
