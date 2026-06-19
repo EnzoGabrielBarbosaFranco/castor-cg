@@ -750,6 +750,38 @@
     transform: scale(1.04);
   }
 
+  .inst-imagem.castor {
+    position: relative;
+    overflow: hidden;
+    min-height: 535px;
+    background: #fff7e8;
+  }
+
+  .inst-imagem-bg.imagem-castor {
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 2;
+    transition: transform 0.8s ease;
+  }
+
+  .inst-imagem.castor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: blur(18px);
+    transform: scale(1.08);
+    opacity: 0.35;
+    z-index: 1;
+  }
+
   .inst-texto {
     display: flex;
     flex-direction: column;
@@ -1064,6 +1096,14 @@
   .dep-data {
     font-size: 0.72rem;
     color: rgba(255,255,255,0.4);
+  }
+
+  .apenasMobile {
+    display: none;
+  }
+
+  .mobileNao {
+    display: block;
   }
 
   .dep-google {
@@ -1629,6 +1669,16 @@
   }
 
   @media (max-width: 640px) {
+    .apenasMobile {
+      display: block;
+    }
+
+    .mobileNao {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
 
     .header {
       height: auto;
@@ -2096,7 +2146,7 @@
 
     <!-- Card 3 -->
     <div class="card-produto reveal reveal-delay-3">
-      <div class="card-produto-bg" style="background-image: url('cama-03.jpg')"></div>
+      <div class="card-produto-bg" style="background-image: url('cama-03.jpeg')"></div>
       <div class="card-produto-overlay"></div>
       <div class="card-produto-conteudo">
         <p class="card-produto-marca">Linha Gold</p>
@@ -2113,8 +2163,11 @@
      INSTITUCIONAL 1 — A LOJA
 ============================================= -->
 <section class="institucional-1">
-  <div class="inst-imagem">
-    <div class="inst-imagem-bg" style="background-image: url('marca-mais-premiada-v5.png');"></div>
+  <div class="inst-imagem castor mobileNao" style="background-image: url('marca-premiada.png');">
+    <div class="inst-imagem-bg imagem-castor"></div>
+  </div>
+  <div class="inst-imagem apenasMobile">
+    <div class="inst-imagem-bg" style="background-image: url('marca-mais-premiada-mobile.png');"></div>
   </div>
   <div class="inst-texto">
     <div class="reveal">
